@@ -1,0 +1,30 @@
+#https://github.com/vetwhat
+#
+#Description:  This bash function (set_host_env) sets all listed parameters according to the parameter-name array (ARRAY_DEFINITION) and the corresponding parameter-value array (foohost). The parameter-value array (foohost) is meant to be named like the hostname on which you execute the bash function set_host_env. It determines the current hostname to resolve the defined parameters. In case there is no value for a defined parameter, it won't be set.
+
+#parameter-name array defines the name and sequence of the parameters to be set. 
+ARRAY_DEFINITION=(IP TYPE ENV ADMIN)
+
+#parameter-value array is named according to the hostname you execute this script. It contains corresponding values to the defined parameter names
+foohost=(127.0.0.1 WEBSERVER Production vetwhat)
+
+set_host_env()
+#Sets all parameters dynamically
+{
+HOST=`hostname`
+ARRAY_LENGTH=${#ARRAY_DEFINITION[*]}
+for (( ARRAY_FIELD=0; ARRAY_FIELD<$ARRAY_LENGTH; ARRAY_FIELD++ ))
+do
+    NAME=${ARRAY_DEFINITION[$ARRAY_FIELD]}
+    ARRAY_VAL=${HOST}[$ARRAY_FIELD]
+    
+    if [ "${!ARRAY_VAL}" == "" ]
+    #Reset a parameter if no value is provided in parameter-value array
+    then
+        unset ${NAME}
+    else
+        eval ${NAME}=${!ARRAY_VAL}
+        echo $NAME=${!ARRAY_VAL}
+    fi
+done
+}
