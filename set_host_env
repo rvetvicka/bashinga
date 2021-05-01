@@ -1,6 +1,9 @@
-#https://github.com/vetwhat
+# https://github.com/rvvrde
 #
-#Description:  This bash function (set_host_env) sets all listed parameters according to the parameter-name array (ARRAY_DEFINITION) and the corresponding parameter-value array (foohost). The parameter-value array (foohost) is meant to be named like the hostname on which you execute the bash function set_host_env. It determines the current hostname to resolve the defined parameters. In case there is no value for a defined parameter, it won't be set.
+# Description:  This bash function (set_host_env) sets all listed parameters according to the parameter-name array (ARRAY_DEFINITION)
+# and the corresponding parameter-value array (foohost). The parameter-value array (foohost) is meant to be named like the hostname
+# on which you execute the bash function set_host_env. It determines the current hostname to resolve the defined parameters.
+# In case there is no value for a defined parameter, it won't be set.
 
 #parameter-name array defines the name and sequence of the parameters to be set. 
 ARRAY_DEFINITION=(IP TYPE ENV ADMIN)
