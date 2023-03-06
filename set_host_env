@@ -1,15 +1,19 @@
 # https://github.com/rvetvicka
 #
-# Description:  This bash function (set_host_env) sets all listed parameters according to the parameter-name array (ARRAY_DEFINITION)
-# and the corresponding parameter-value array (foohost). The parameter-value array (foohost) is meant to be named like the hostname
-# on which you execute the bash function set_host_env. It determines the current hostname to resolve the defined parameters.
-# In case there is no value for a defined parameter, it won't be set.
+# Description: The bash function 'set_host_env' sets all listed parameters according to two arrays:
+# (1) the variable-name array called 'ARRAY_DEFINITION' and the corresponding (2)variable-value array.
+# (2) is supposed to be named like the actual hostname of the machine you are going to execute this function.
+# When executing the function, it first determines the current hostname and resolves parameters that are
+# defined in the array afterwards. In case there are no values present, the 'empty' variables are not set. 
+#
+# Remark: The function does not validate the actual values. Shit in, Shit out. 
+#
 
-#parameter-name array defines the name and sequence of the parameters to be set. 
+#the variable-names that are going to be set for the host 
 ARRAY_DEFINITION=(IP TYPE ENV ADMIN)
 
-#parameter-value array is named according to the hostname you execute this script. It contains corresponding values to the defined parameter names
-foohost=(127.0.0.1 WEBSERVER Production vetwhat)
+#the values that are going to be set accordingly when executed
+foohost=(192.168.0.1 WEBSERVER production johndoe)
 
 set_host_env()
 #Sets all parameters dynamically
@@ -21,8 +25,8 @@ do
     NAME=${ARRAY_DEFINITION[$ARRAY_FIELD]}
     ARRAY_VAL=${HOST}[$ARRAY_FIELD]
     
+    #reset a variable if no value is defined
     if [ "${!ARRAY_VAL}" == "" ]
-    #Reset a parameter if no value is provided in parameter-value array
     then
         unset ${NAME}
     else
