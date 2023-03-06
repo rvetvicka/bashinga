@@ -1,4 +1,4 @@
-# https://github.com/rvvrde
+# https://github.com/rvetvicka
 #
 # Description:  This bash function (set_host_env) sets all listed parameters according to the parameter-name array (ARRAY_DEFINITION)
 # and the corresponding parameter-value array (foohost). The parameter-value array (foohost) is meant to be named like the hostname
